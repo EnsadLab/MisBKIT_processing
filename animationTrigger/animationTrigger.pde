@@ -34,21 +34,24 @@ void draw() {
 
 void startAnimation(String animName) {
   OscMessage msg = new OscMessage("/mbk/anims/start");
-  msg.add(animName);
+  //msg.add(animName);
+  msg.add(0);
   oscP5.send(msg, remoteLocation); 
 }
 
 
 void stopAnimation(String animName){
   OscMessage msg = new OscMessage("/mbk/anims/stop");
-  msg.add(animName);
+  //msg.add(animName);
+  msg.add(0);
   oscP5.send(msg, remoteLocation); 
 }
 
 
 void loopAnimation(String animName){
   OscMessage msg = new OscMessage("/mbk/anims/loop");
-  msg.add(animName);
+  //msg.add(animName);
+  msg.add(0);
   oscP5.send(msg, remoteLocation); 
 }
 
