@@ -6,9 +6,14 @@
  
 import oscP5.*;
 import netP5.*;
-  
+import controlP5.*;
+
 OscP5 oscP5;
 NetAddress remoteLocation;
+ControlP5 cp5;
+
+int sliderValue = 100;
+int oldSliderValue = 100;
 
 void setup() {
   size(400,400);
@@ -24,17 +29,32 @@ void setup() {
    * send messages back to this sketch.
    */
   remoteLocation = new NetAddress("127.0.0.1",5555);
+  
+  cp5 = new ControlP5(this);
+  
+  // add a horizontal sliders, the value of this slider will be linked
+  // to variable 'sliderValue' 
+  cp5.addSlider("sliderValue")
+     .setPosition(100,50)
+     .setSize(200,50)
+     .setRange(0,100)
+     ;
+     
+  
 }
 
 
 void draw() {
   background(0);  
+  if(oldSliderValue != sliderValue){
+    sendSensorValue(7,sliderValue);
+  }
+  oldSliderValue = sliderValue;
 }
 
 
 void sendSensorValue(int pin, int value) {
   OscMessage msg = new OscMessage("/mbk/sensors");
-  //msg.add(animName);
   msg.add(pin);
   msg.add(value);
   oscP5.send(msg, remoteLocation); 
