@@ -19,7 +19,7 @@ void setup() {
   size(400,400);
   frameRate(25);
   /* start oscP5, listening for incoming messages at port 5555 */
-  oscP5 = new OscP5(this,5555);
+  oscP5 = new OscP5(this,8888);
   
   /* remoteLocation is a NetAddress. a NetAddress takes 2 parameters,
    * an ip address and a port number. remoteLocation is used as parameter in
@@ -39,8 +39,7 @@ void setup() {
      .setSize(200,50)
      .setRange(0,100)
      ;
-     
-  
+   
 }
 
 

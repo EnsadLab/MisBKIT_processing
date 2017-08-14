@@ -1,7 +1,8 @@
 /**
  * animationTrigger - MisBKIT
- * example showing how to trigger animations through OSC
- * In order to make this example work, you need an animation in MisBKIT called "anim1".
+ * example showing how to receive sensor values from MisBKIT and how to start animations through OSC
+ * In order to make this example work, you need three animations in MisBKIT called 
+ * "anim1", "anim2" and "anim3". 
  */
  
 import oscP5.*;
@@ -10,6 +11,9 @@ import netP5.*;
 OscP5 oscP5;
 NetAddress remoteLocation;
 boolean loop = false;
+
+int oldArea = -1;
+int area = -1;
 
 
 void setup() {
@@ -57,6 +61,39 @@ void loopAnimation(String animName, boolean on){
   oscP5.send(msg, remoteLocation); 
 }
 
+void triggerAnimation(String sensorName, float value, float valMin, float valMax){
+  
+  float oneThird = (valMax-valMin)/3.0 + valMin;
+  float twoThird = 2.0*(valMax-valMin)/3.0 + valMin;
+  println("THIRDS: " + oneThird + " " + twoThird);
+  loopAnimation("anim1", true);
+  loopAnimation("anim2", true);
+  loopAnimation("anim3", true);
+  if(value >= valMin && value < oneThird) {
+    area = 1;
+    if(area != oldArea){
+      startAnimation("anim1");
+      stopAnimation("anim2");
+      stopAnimation("anim3");
+    }
+  }else if(value >= oneThird && value < twoThird){
+    area = 2;
+    if(area != oldArea){
+      startAnimation("anim2");
+      stopAnimation("anim1");
+      stopAnimation("anim3");
+    }
+  }else if(value >= twoThird && value < valMax){
+    area = 3;
+    if(area != oldArea){
+      startAnimation("anim3");
+      stopAnimation("anim1");
+      stopAnimation("anim2");
+    }
+  }
+  
+}
+
 void mousePressed() {
 
 }
@@ -79,5 +116,8 @@ void oscEvent(OscMessage theOscMessage) {
   print("### received an osc message.");
   print(" addrpattern: "+theOscMessage.addrPattern());
   println(" typetag: "+theOscMessage.typetag());
-
+  println(" args: " + theOscMessage.get(0).stringValue() + " " + theOscMessage.get(1).floatValue()
+          + " " + theOscMessage.get(2).floatValue() + " " + theOscMessage.get(3).floatValue());
+  triggerAnimation(theOscMessage.get(0).stringValue(),theOscMessage.get(1).floatValue(),
+                theOscMessage.get(2).floatValue(), theOscMessage.get(3).floatValue());
 }
