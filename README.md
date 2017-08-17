@@ -13,11 +13,11 @@ Theses examples had been tested on processing 3.0.1
 
 ## Description
 
-animationTrigger is an example that shows how to start, loop and stop an animation based on key inputs.
+**animationTrigger** is an example that shows how to start, loop and stop an animation based on key inputs.
 
-multipleAnimationTrigger listens to incoming sensor messages and according to the value, trigger animation anim1, anim2 and anim3.
+**multipleAnimationTrigger** listens to incoming sensor messages and according to the value, trigger animation anim1, anim2 and anim3.
 
-sensorSimulator is used in order to simulate a sensor entry.
+**sensorSimulator** is used in order to simulate a sensor entry.
 
 
 ## OSC messaging
