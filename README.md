@@ -25,4 +25,18 @@ sensorSimulator is used in order to simulate a sensor entry.
 Sensors:
 
 /mbk/sensors sensorName sensorValue sensorMin sensorMax
+AND:
+/mbk/sensors/sensorValue/sensorMin/sensorMax sensorName
+(where parameters are added in the adress to be compatible with devices that handle only one parameter per osc message.)
+
+Animations:
+
+/mbk/anims/start animName
+/mbk/anims/stop animName
+/mbk/anims/loopOn animName
+/mbk/anims/loopOff animName
+
+
+Motors:
+
 
