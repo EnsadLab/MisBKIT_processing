@@ -29,6 +29,7 @@ Theses examples had been tested on processing 3.0.1
 AND:
 
 /mbk/sensors/sensorValue/sensorMin/sensorMax sensorName
+
 (where parameters are added in the adress to be compatible with devices that handle only one parameter per osc message.)
 
 **Animations:**
