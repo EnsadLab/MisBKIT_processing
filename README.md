@@ -23,5 +23,6 @@ sensorSimulator is used in order to simulate a sensor entry.
 ## OSC messaging
 
 Sensors:
+
 /mbk/sensors sensorName sensorValue sensorMin sensorMax
 
