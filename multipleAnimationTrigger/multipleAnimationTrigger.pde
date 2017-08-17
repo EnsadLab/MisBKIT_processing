@@ -15,6 +15,7 @@ boolean loop = false;
 int oldArea = -1;
 int area = -1;
 
+int tolerance = 10;
 
 void setup() {
   size(400,400);
@@ -30,6 +31,8 @@ void setup() {
    * send messages back to this sketch.
    */
   remoteLocation = new NetAddress("127.0.0.1",4444);
+  
+  //loopAnimation("anim1", false);
 }
 
 
@@ -61,31 +64,33 @@ void loopAnimation(String animName, boolean on){
   oscP5.send(msg, remoteLocation); 
 }
 
+boolean test=true;
 void triggerAnimation(String sensorName, float value, float valMin, float valMax){
   
   float oneThird = (valMax-valMin)/3.0 + valMin;
   float twoThird = 2.0*(valMax-valMin)/3.0 + valMin;
   println("THIRDS: " + oneThird + " " + twoThird);
-  loopAnimation("anim1", true);
-  loopAnimation("anim2", true);
-  loopAnimation("anim3", true);
-  if(value >= valMin && value < oneThird) {
+  
+  if(value >= valMin && value < oneThird-tolerance) {
     area = 1;
     if(area != oldArea){
+      loopAnimation("anim1", true);
       startAnimation("anim1");
       stopAnimation("anim2");
       stopAnimation("anim3");
     }
-  }else if(value >= oneThird && value < twoThird){
+  }else if(value >= oneThird+tolerance && value < twoThird-tolerance){
     area = 2;
     if(area != oldArea){
+      loopAnimation("anim2", true);
       startAnimation("anim2");
       stopAnimation("anim1");
       stopAnimation("anim3");
     }
-  }else if(value >= twoThird && value < valMax){
+  }else if(value >= twoThird+tolerance && value < valMax){
     area = 3;
     if(area != oldArea){
+      loopAnimation("anim3", true);
       startAnimation("anim3");
       stopAnimation("anim1");
       stopAnimation("anim2");
