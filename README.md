@@ -22,7 +22,7 @@ Theses examples had been tested on processing 3.0.1
 
 ## OSC messaging
 
-Sensors:
+**Sensors:**
 
 /mbk/sensors sensorName sensorValue sensorMin sensorMax
 
@@ -31,7 +31,7 @@ AND:
 /mbk/sensors/sensorValue/sensorMin/sensorMax sensorName
 (where parameters are added in the adress to be compatible with devices that handle only one parameter per osc message.)
 
-Animations:
+**Animations:**
 
 /mbk/anims/start animName
 
@@ -42,6 +42,6 @@ Animations:
 /mbk/anims/loopOff animName
 
 
-Motors:
+**Motors:**
 
 
