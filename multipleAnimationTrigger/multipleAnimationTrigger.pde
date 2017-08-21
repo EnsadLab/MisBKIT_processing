@@ -121,8 +121,10 @@ void oscEvent(OscMessage theOscMessage) {
   print("### received an osc message.");
   print(" addrpattern: "+theOscMessage.addrPattern());
   println(" typetag: "+theOscMessage.typetag());
-  println(" args: " + theOscMessage.get(0).stringValue() + " " + theOscMessage.get(1).floatValue()
-          + " " + theOscMessage.get(2).floatValue() + " " + theOscMessage.get(3).floatValue());
-  triggerAnimation(theOscMessage.get(0).stringValue(),theOscMessage.get(1).floatValue(),
-                theOscMessage.get(2).floatValue(), theOscMessage.get(3).floatValue());
+  if(theOscMessage.addrPattern().equals("/mbk/sensors") && theOscMessage.typetag().equals("sfff")){
+    println(" args: " + theOscMessage.get(0).stringValue() + " " + theOscMessage.get(1).floatValue()
+            + " " + theOscMessage.get(2).floatValue() + " " + theOscMessage.get(3).floatValue());
+    triggerAnimation(theOscMessage.get(0).stringValue(),theOscMessage.get(1).floatValue(),
+                  theOscMessage.get(2).floatValue(), theOscMessage.get(3).floatValue());
+  }
 }
