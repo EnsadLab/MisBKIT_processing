@@ -17,6 +17,8 @@ Theses examples had been tested on processing 3.0.1
 
 **multipleAnimationTrigger** listens to incoming sensor messages and according to the value, trigger animation anim1, anim2 and anim3.
 
+**motorTrigger** listens to incoming sensor messages and according to the value, controls the motor's position and velocity.
+
 **sensorSimulator** is used in order to simulate a sensor entry.
 
 
