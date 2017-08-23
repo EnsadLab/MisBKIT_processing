@@ -51,9 +51,9 @@ AND:
 
 /mbk/motors/jointmode motorIndex
 
-/mbk/motors/wheel/value motorIndex
+/mbk/motors/wheel/motorIndex value
 
-/mbk/motors/joint/value motorIndex
+/mbk/motors/joint/motorIndex value
 
 /mbk/motors/value motorIndex (value will be interpreted by the context of MisBKIT, so either considered as a velocity or as a joint position)
 
