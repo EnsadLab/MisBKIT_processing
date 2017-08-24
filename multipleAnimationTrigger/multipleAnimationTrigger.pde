@@ -96,6 +96,7 @@ void triggerAnimation(String sensorName, float value, float valMin, float valMax
       stopAnimation("anim2");
     }
   }
+  oldArea = area;
   
 }
 
