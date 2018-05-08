@@ -1,7 +1,9 @@
 /**
  * animationTrigger - MisBKIT
- * example showing how to receive sensor values from MisBKIT and how to start animations through OSC
- * 
+ * example showing how to send value to the misBKIT sensors.
+ * /mbk/sensors/ sensorName value minValue maxValue OR
+ * /mbk/sensors/ sensorName value OR
+ * /mbk/sensors/sensorName value
  */
  
 import oscP5.*;
@@ -12,14 +14,15 @@ OscP5 oscP5;
 NetAddress remoteLocation;
 ControlP5 cp5;
 
-int sliderValue = 100;
-int oldSliderValue = 100;
+int sliderValue = 0;
+int oldSliderValue = 0;
+String sensor_name = "sensor_test";
 
 void setup() {
   size(400,400);
   frameRate(25);
   /* start oscP5, listening for incoming messages at port 5555 */
-  oscP5 = new OscP5(this,8888);
+  oscP5 = new OscP5(this,5555);
   
   /* remoteLocation is a NetAddress. a NetAddress takes 2 parameters,
    * an ip address and a port number. remoteLocation is used as parameter in
@@ -28,7 +31,7 @@ void setup() {
    * and the port of the remote location address are the same, hence you will
    * send messages back to this sketch.
    */
-  remoteLocation = new NetAddress("127.0.0.1",5555);
+  remoteLocation = new NetAddress("127.0.0.1",4444);
   
   cp5 = new ControlP5(this);
   
@@ -46,16 +49,18 @@ void setup() {
 void draw() {
   background(0);  
   if(oldSliderValue != sliderValue){
-    sendSensorValue(7,sliderValue);
+    sendSensorValue(sensor_name,sliderValue);
   }
   oldSliderValue = sliderValue;
 }
 
 
-void sendSensorValue(int pin, int value) {
+void sendSensorValue(String name, int value) {
   OscMessage msg = new OscMessage("/mbk/sensors");
-  msg.add(pin);
-  msg.add(value);
+  msg.add(name);
+  float v = float(value)/100.0;
+  msg.add(v);
+  //print(msg);
   oscP5.send(msg, remoteLocation); 
 }
 
@@ -66,7 +71,7 @@ void mousePressed() {
 
 void keyPressed() {
   if (key == 'r') {
-    sendSensorValue(7,int(random(100)));
+    sendSensorValue(sensor_name,int(random(100)));
   }
 }
 
